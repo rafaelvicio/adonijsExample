@@ -20,7 +20,7 @@ class FeedController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
-    const feeds = await feeds.all();
+    const feeds = await Feed.all();
 
     return feeds;
   }
@@ -34,10 +34,10 @@ class FeedController {
    * @param {Response} ctx.response
    */
   async store({ request, auth, response }) {
-    const data = request.only(['content'])
-    const feed = await Feed.create(data)
+    const data = request.only(["content"]);
+    const feed = await Feed.create(data);
 
-    return feed
+    return feed;
   }
 
   /**
@@ -50,9 +50,9 @@ class FeedController {
    * @param {View} ctx.view
    */
   async show({ params, request, response, view }) {
-    const feed = await Feed.findOrFail(params.id)
+    const feed = await Feed.findOrFail(params.id);
 
-    return feed
+    return feed;
   }
 
   /**
@@ -64,14 +64,14 @@ class FeedController {
    * @param {Response} ctx.response
    */
   async update({ params, request, response }) {
-    const data = request.only(['content'])
-    const feed = await Feed.find(params.id)
+    const data = request.only(["content"]);
+    const feed = await Feed.find(params.id);
 
-    feed.merge(data)
+    feed.merge(data);
 
-    await feed.save()
+    await feed.save();
 
-    return feed
+    return feed;
   }
 
   /**
@@ -83,8 +83,8 @@ class FeedController {
    * @param {Response} ctx.response
    */
   async destroy({ params, request, response }) {
-    const feed = await Feed.findOrFail(params.id)
-    await feed.delete()
+    const feed = await Feed.findOrFail(params.id);
+    await feed.delete();
   }
 }
 
