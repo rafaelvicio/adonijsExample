@@ -64,7 +64,14 @@ class FeedController {
    * @param {Response} ctx.response
    */
   async update({ params, request, response }) {
+    const data = request.only(['content'])
+    const feed = await Feed.find(params.id)
 
+    feed.merge(data)
+
+    await feed.save()
+
+    return feed
   }
 
   /**
