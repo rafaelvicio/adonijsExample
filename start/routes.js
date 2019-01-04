@@ -24,5 +24,21 @@ Route.post("/register", "AuthController.register");
 Route.post("/authenticate", "AuthController.authenticate");
 
 Route.group(() => {
+  Route.resource("games", "GameController").apiOnly();
+}).middleware(["auth"]);
+
+Route.group(() => {
+  Route.resource("teams", "TeamController").apiOnly();
+}).middleware(["auth"]);
+
+Route.group(() => {
+  Route.resource("tournaments", "TournamentController").apiOnly();
+}).middleware(["auth"]);
+
+Route.group(() => {
+  Route.resource("matches", "MatcheController").apiOnly();
+}).middleware(["auth"]);
+
+Route.group(() => {
   Route.resource("feeds", "FeedController").apiOnly();
 }).middleware(["auth"]);
