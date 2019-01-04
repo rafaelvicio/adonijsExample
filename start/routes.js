@@ -20,3 +20,7 @@ Route.post("/register", "AuthController.register");
 Route.post("/authenticate", "AuthController.authenticate");
 
 Route.get("/app", "AppController.index").middleware(["auth"]);
+
+Route.group(() => {
+    Route.resource('feeds', 'FeedController').apiOnly()
+}).middleware(["auth"]);

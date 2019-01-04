@@ -33,7 +33,12 @@ class FeedController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store({ request, response }) {}
+  async store({ request, auth, response }) {
+    const data = request.only(['content'])
+    const feed = await Feed.create(data)
+
+    return feed
+  }
 
   /**
    * Display a single feed.
@@ -44,7 +49,11 @@ class FeedController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show({ params, request, response, view }) {}
+  async show({ params, request, response, view }) {
+    const feed = await Feed.findOrFail(params.id)
+
+    return feed
+  }
 
   /**
    * Update feed details.
@@ -54,7 +63,9 @@ class FeedController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update({ params, request, response }) {}
+  async update({ params, request, response }) {
+
+  }
 
   /**
    * Delete a feed with id.
@@ -64,7 +75,10 @@ class FeedController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy({ params, request, response }) {}
+  async destroy({ params, request, response }) {
+    const feed = await Feed.findOrFail(params.id)
+    await feed.delete()
+  }
 }
 
 module.exports = FeedController;
