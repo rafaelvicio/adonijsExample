@@ -34,7 +34,7 @@ class FeedController {
    * @param {Response} ctx.response
    */
   async store({ request, auth, response }) {
-    const data = request.only(["content"]);
+    const data = request.only(["title", "description", "url", "author"]);
     const feed = await Feed.create(data);
 
     return feed;
@@ -64,7 +64,7 @@ class FeedController {
    * @param {Response} ctx.response
    */
   async update({ params, request, response }) {
-    const data = request.only(["content"]);
+    const data = request.only(["title", "description", "url", "author"]);
     const feed = await Feed.find(params.id);
 
     feed.merge(data);
