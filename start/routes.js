@@ -40,5 +40,9 @@ Route.group(() => {
 }).middleware(["auth"]);
 
 Route.group(() => {
+  Route.resource("codes", "CodeController").apiOnly();
+}).middleware(["auth"]);
+
+Route.group(() => {
   Route.resource("feeds", "FeedController").apiOnly();
 }).middleware(["auth"]);
