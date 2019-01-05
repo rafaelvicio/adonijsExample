@@ -96,7 +96,8 @@ class CodeController {
   async resgatar({ params, request, response, auth }) {
 
     console.log("User do param: ", params.id)
-    console.log("User do auth", auth.user.id)
+    console.log("Auth: ", auth)
+    console.log("User do auth: ", auth.user.id)
 
     const user = await User.findOrFail(auth.user.id);
 
