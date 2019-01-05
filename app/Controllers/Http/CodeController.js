@@ -5,7 +5,6 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const Code = use("App/Models/Code");
-const User = use("App/Models/User");
 
 /**
  * Resourceful controller for interacting with codes
@@ -95,19 +94,17 @@ class CodeController {
 
   async resgatar({ params, request, response, auth }) {
 
-    console.log("User do param: ", params.id)
     let user = null
 
     try {
       user = await auth.getUser()
-      console.log("O suer: ", user)
     } catch (error) {
       response.send('Missing or invalid jwt token')
     }
 
     await user.codes().attach(params.id)
 
-    return code;
+    return user;
   }
 }
 

@@ -40,6 +40,10 @@ Route.group(() => {
 }).middleware(["auth"]);
 
 Route.group(() => {
+  Route.resource("bets", "BetController").apiOnly();
+}).middleware(["auth"]);
+
+Route.group(() => {
   Route.resource("codes", "CodeController").apiOnly();
 }).middleware(["auth"]);
 
