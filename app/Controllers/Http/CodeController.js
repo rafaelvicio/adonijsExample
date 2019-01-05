@@ -96,13 +96,16 @@ class CodeController {
   async resgatar({ params, request, response, auth }) {
 
     console.log("User do param: ", params.id)
-    console.log("Auth: ", auth)
-    console.log("User do auth: ", auth.user.id)
+    let user = null
 
-    const user = await User.findOrFail(auth.user.id);
+    try {
+      user = await auth.getUser()
+      console.log("O suer: ", user)
+    } catch (error) {
+      response.send('Missing or invalid jwt token')
+    }
 
     await user.codes().attach(params.id)
-
 
     return code;
   }
