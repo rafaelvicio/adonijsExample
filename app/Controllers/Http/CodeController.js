@@ -10,6 +10,22 @@ const Code = use("App/Models/Code");
  * Resourceful controller for interacting with codes
  */
 class CodeController {
+
+  async resgatar({ params, request, response, auth }) {
+
+    let user = null
+
+    try {
+      user = await auth.getUser()
+    } catch (error) {
+      response.send('Missing or invalid jwt token')
+    }
+
+    await user.codes().attach(params.id)
+
+    return user;
+  }
+
   /**
    * Show a list of all codes.
    * GET codes
@@ -90,21 +106,6 @@ class CodeController {
   async destroy({ params, request, response }) {
     const code = await Code.findOrFail(params.id);
     await code.delete();
-  }
-
-  async resgatar({ params, request, response, auth }) {
-
-    let user = null
-
-    try {
-      user = await auth.getUser()
-    } catch (error) {
-      response.send('Missing or invalid jwt token')
-    }
-
-    await user.codes().attach(params.id)
-
-    return user;
   }
 }
 

@@ -1,2 +1,14 @@
+-- Listar Bets do Usuario
+-- Resgatar Bet
+-- ShowBetByMatche
+
+-- Listar Historys do Ususario
+-- Atualizar Pontos somando Historys
+
+-- Partidas por Torneio
+
+-- Buscar ususario logado
+
+
 const team = await Team.create({name: 'Team 1'})
 await user.teams().attach(team.party_id)
