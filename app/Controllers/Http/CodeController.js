@@ -5,6 +5,7 @@
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
 const Code = use("App/Models/Code");
+const User = use("App/Models/User");
 
 /**
  * Resourceful controller for interacting with codes
@@ -90,6 +91,16 @@ class CodeController {
   async destroy({ params, request, response }) {
     const code = await Code.findOrFail(params.id);
     await code.delete();
+  }
+
+  async resgatar({ params, request, response, auth }) {
+
+    const user = await User.findOrFail(auth.user.id);
+
+    await user.codes().attach(params.id)
+
+
+    return code;
   }
 }
 
