@@ -43,7 +43,7 @@ Route.group(() => {
   Route.resource("codes", "CodeController").apiOnly();
 }).middleware(["auth"]);
 
-Route.post("/codes/resgatar/:id", "CodeController.resgatar");
+Route.get("/codes/resgatar/:id", "CodeController.resgatar");
 
 Route.group(() => {
   Route.resource("feeds", "FeedController").apiOnly();
