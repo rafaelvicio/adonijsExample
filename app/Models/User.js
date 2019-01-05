@@ -8,7 +8,9 @@ const Hash = use("Hash");
 
 class User extends Model {
   codes() {
-    return this.belongsToMany("App/Models/Code").pivotTable("user_code");
+    return this.belongsToMany("App/Models/Code").pivotModel(
+      "App/Models/UserCode"
+    );
   }
 
   static boot() {

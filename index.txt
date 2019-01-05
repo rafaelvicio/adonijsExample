@@ -1,0 +1,2 @@
+const team = await Team.create({name: 'Team 1'})
+await user.teams().attach(team.party_id)
