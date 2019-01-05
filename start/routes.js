@@ -44,6 +44,10 @@ Route.group(() => {
 }).middleware(["auth"]);
 
 Route.group(() => {
+  Route.resource("historys", "HistoryController").apiOnly();
+}).middleware(["auth"]);
+
+Route.group(() => {
   Route.resource("codes", "CodeController").apiOnly();
 }).middleware(["auth"]);
 

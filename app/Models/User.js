@@ -7,6 +7,10 @@ const Model = use("Model");
 const Hash = use("Hash");
 
 class User extends Model {
+  historys() {
+    return this.hasMany('App/Models/History')
+  }
+
   codes() {
     return this.belongsToMany("App/Models/Code").pivotModel(
       "App/Models/UserCode"
