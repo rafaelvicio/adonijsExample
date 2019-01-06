@@ -4,6 +4,8 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
+const moment = require('moment');
+
 const Bet = use("App/Models/Bet");
 const Matche = use("App/Models/Matche");
 const History = use("App/Models/History");
@@ -38,20 +40,20 @@ class BetController {
       return
     }
 
-    const user = await auth.getUser()
+    if (matche.winner_id = bet.team_winner_id) {
+      const user = await auth.getUser()
 
-    //Criar History
+      const historyData = {
+        name: "Resgate bem sucedido",
+        description: "Resgate",
+        type: "Aposta",
+        points: "100",
+        user_id: user.id,
+        date_validity: moment().add(3, 'years')
+      }
 
-    const historyData = {
-      name: "Primeira History",
-      description: "Descricao",
-      type: "Aposta",
-      points: "100",
-      user_id: user.id,
-      date_validity: "2020-01-05 15:17:22"
+      await History.create(historyData);
     }
-
-    await History.create(historyData);
 
     bet.status = "fechada"
 
