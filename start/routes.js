@@ -20,8 +20,9 @@ Route.get("/", () => {
   return { greeting: "Hello world in JSON" };
 });
 
-Route.post("/register", "AuthController.register");
-Route.post("/authenticate", "AuthController.authenticate");
+Route.get("/auth", "AuthController.auth");
+Route.post("/auth/register", "AuthController.register");
+Route.post("/auth/authenticate", "AuthController.authenticate");
 
 Route.group(() => {
   Route.resource("games", "GameController").apiOnly();
