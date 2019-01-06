@@ -7,6 +7,9 @@ class Team extends Model {
   matches() {
     return this.hasMany("App/Models/Matche");
   }
+  bets() {
+    return this.hasMany("App/Models/Bet");
+  }
 }
 
 module.exports = Team

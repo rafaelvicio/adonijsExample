@@ -11,6 +11,10 @@ class User extends Model {
     return this.hasMany('App/Models/History')
   }
 
+  bets() {
+    return this.hasMany("App/Models/Bet");
+  }
+
   codes() {
     return this.belongsToMany("App/Models/Code").pivotModel(
       "App/Models/UserCode"

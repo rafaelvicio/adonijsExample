@@ -13,7 +13,12 @@ const History = use("App/Models/History");
  */
 class BetController {
 
-  async resgatar ({ params, request, response, auth }) {
+  async resgatar({
+    params,
+    request,
+    response,
+    auth
+  }) {
     const bet = await Bet.find(params.id);
 
     if (bet.status == "fechada") {
@@ -23,12 +28,12 @@ class BetController {
 
     const matche = await Matche.find(bet.matche_id);
 
-    if(matche.status !== "fechada") {
+    if (matche.status !== "fechada") {
       response.send('Partida nao ja esta fechada')
       return
     }
 
-    if(matche.winner_id == "" || matche.winner_id == null) {
+    if (matche.winner_id == "" || matche.winner_id == null) {
       response.send('Partida sem vencedor anunciado')
       return
     }
@@ -64,8 +69,17 @@ class BetController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async index ({ request, response, view }) {
-    const bets = await Bet.all();
+  async index({
+    request,
+    response,
+    view
+  }) {
+    const bets = await Bet.query()
+      .with("user")
+      .with("tournament")
+      .with("game")
+      .with("team")
+      .fetch();
 
     return bets;
   }
@@ -78,7 +92,11 @@ class BetController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async store ({ request, auth, response }) {
+  async store({
+    request,
+    auth,
+    response
+  }) {
     const data = request.only([
       "matche_id",
       "team_winner_id",
@@ -87,7 +105,10 @@ class BetController {
     ]);
     try {
       const user = await auth.getUser()
-      const bet = await Bet.create({ user_id: user.id, ...data });
+      const bet = await Bet.create({
+        user_id: user.id,
+        ...data
+      });
       return bet;
     } catch (error) {
       response.send('Missing or invalid jwt token', error)
@@ -103,7 +124,12 @@ class BetController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async show ({ params, request, response, view }) {
+  async show({
+    params,
+    request,
+    response,
+    view
+  }) {
     const bet = await Bet.findOrFail(params.id);
 
     return bet;
@@ -117,12 +143,17 @@ class BetController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
-    const data = request.only([ "matche_id",
-    "user_id",
-    "team_winner_id",
-    "tournament_id",
-    "game_id"]);
+  async update({
+    params,
+    request,
+    response
+  }) {
+    const data = request.only(["matche_id",
+      "user_id",
+      "team_winner_id",
+      "tournament_id",
+      "game_id"
+    ]);
     const bet = await Bet.find(params.id);
 
     bet.merge(data);
@@ -140,7 +171,11 @@ class BetController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async destroy ({ params, request, response }) {
+  async destroy({
+    params,
+    request,
+    response
+  }) {
     const bet = await Bet.findOrFail(params.id);
     await bet.delete();
   }
