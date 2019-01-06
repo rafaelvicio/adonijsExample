@@ -20,11 +20,14 @@ class MatcheController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
-    const matches2 = await Matche.query()
-      .with("game", "tournament")
+    const matches = await Matche.query()
+      .with("tournament")
+      .with("game")
+      .with("team01")
+      .with("team02")
       .fetch();
 
-    return matches2;
+    return matches;
   }
 
   /**

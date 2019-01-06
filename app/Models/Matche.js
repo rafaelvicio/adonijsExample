@@ -4,18 +4,18 @@
 const Model = use('Model')
 
 class Matche extends Model {
-    team01 () {
-        return this.hasMany('App/Models/Team')
-    }
-    team02 () {
-        return this.hasMany('App/Models/Team')
-    }
-    game () {
-        return this.hasMany('App/Models/Game')
-    }
-    tournament () {
-        return this.hasMany('App/Models/Tournament')
-    }
+  tournament() {
+    return this.belongsTo('App/Models/Tournament')
+  }
+  game() {
+    return this.belongsTo('App/Models/Game')
+  }
+  team01() {
+    return this.belongsTo('App/Models/Team', "team_01_id")
+  }
+  team02() {
+    return this.belongsTo('App/Models/Team', "team_02_id")
+  }
 }
 
 module.exports = Matche
