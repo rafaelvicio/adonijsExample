@@ -41,10 +41,9 @@ class HistoryController {
       "user_id",
       "date_validity"
     ]);
-    const history = await History.create(data);
-    return history;
+    const historys = await History.create(data);
+    return historys;
   }
-  
 
   /**
    * Display a single history.
@@ -95,8 +94,8 @@ class HistoryController {
    * @param {Response} ctx.response
    */
   async destroy ({ params, request, response }) {
-    const matche = await Matche.findOrFail(params.id);
-    await matche.delete();
+    const history = await History.findOrFail(params.id);
+    await history.delete();
   }
 }
 

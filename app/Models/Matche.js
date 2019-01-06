@@ -4,8 +4,17 @@
 const Model = use('Model')
 
 class Matche extends Model {
-    bets () {
-        return this.hasMany('App/Models/Bet')
+    team01 () {
+        return this.hasMany('App/Models/Team')
+    }
+    team02 () {
+        return this.hasMany('App/Models/Team')
+    }
+    game () {
+        return this.hasMany('App/Models/Game')
+    }
+    tournament () {
+        return this.hasMany('App/Models/Tournament')
     }
 }
 

@@ -41,6 +41,7 @@ Route.group(() => {
 
 Route.group(() => {
   Route.resource("bets", "BetController").apiOnly();
+  Route.get("/bets/:id/resgatar", "BetController.resgatar");
 }).middleware(["auth"]);
 
 Route.group(() => {
@@ -49,9 +50,8 @@ Route.group(() => {
 
 Route.group(() => {
   Route.resource("codes", "CodeController").apiOnly();
+  Route.get("/codes/:id/resgatar", "CodeController.resgatar");
 }).middleware(["auth"]);
-
-Route.get("/codes/resgatar/:id", "CodeController.resgatar");
 
 Route.group(() => {
   Route.resource("feeds", "FeedController").apiOnly();

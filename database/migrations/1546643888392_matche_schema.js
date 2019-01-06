@@ -44,6 +44,7 @@ class MatcheSchema extends Schema {
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
       table.datetime("start_time");
+      table.enu('status', ['aberta', 'fechada'])
       table.timestamps();
     });
   }
